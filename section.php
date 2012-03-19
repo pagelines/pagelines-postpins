@@ -7,6 +7,7 @@
 	Class Name: PostPins	
 	Workswith: templates, main
 	Edition: Pro
+	Version: 1.0
 */
 
 /**
