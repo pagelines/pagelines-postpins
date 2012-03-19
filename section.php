@@ -6,6 +6,7 @@
 	Description: A continuous list of post 'pins', inspired by Pinterest. Loaded dynamically and arranged organically.
 	Class Name: PostPins	
 	Workswith: templates, main
+	Edition: Pro
 */
 
 /**
