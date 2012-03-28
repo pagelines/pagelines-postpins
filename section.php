@@ -81,6 +81,7 @@ class PostPins extends PageLinesSection {
 					url: jQuery(this).attr('href') + '#pinboard',
 					dataType: "html",
 					success: function(out) {
+						
 						result = jQuery(out).find('.pinboard .postpin-wrap');
 						nextlink = jQuery(out).find('.fetchpins a').attr('href');
 						
@@ -102,6 +103,16 @@ class PostPins extends PageLinesSection {
 		</script>
 	<?php }
 
+	/* Section template.
+	 ****************************/
+	function pl_current_url(){
+		
+		 
+		$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		
+		return substr($url,0,strpos($url, '?'));
+	}
+	
 	/**
 	* Section template.
 	*/
@@ -113,7 +124,9 @@ class PostPins extends PageLinesSection {
 		
 		$number_of_pins = (ploption('pins_number', $this->oset)) ? ploption('pins_number', $this->oset) : 15;
 	
-		$current_url = get_permalink($post->ID);
+		$this->pl_current_url();
+	
+		$current_url = $this->pl_current_url();
 		
 		$page = (isset($_GET['pins']) && $_GET['pins'] != 1) ? $_GET['pins'] : 1;
 		
@@ -127,10 +140,11 @@ class PostPins extends PageLinesSection {
 			} else 
 				$image = '';
 				
+				
 			$meta_bottom = sprintf(
 				'<div class="pin-meta pin-bottom subtext">%s <span class="divider">/</span> %s</div>', 
 				get_the_time('M j, Y', $p->ID),
-				do_shortcode('[post_comments]')
+				$this->pl_get_comments_link($p->ID)
 			);
 			
 			if(!isset($category)){
@@ -173,6 +187,27 @@ class PostPins extends PageLinesSection {
 			$next_url = '';
 			
 		printf('<div class="pinboard fix"><div class="postpin-list fix">%s</div>%s<div class="clear"></div></div>', $out, $next_url);
+	}
+	
+	function pl_get_comments_link( $post_id ){
+
+		$num_comments = get_comments_number($post_id);
+		 if ( comments_open() ){
+		 	  if($num_comments == 0){
+		 	  	  $comments = __('Add Comment', 'pagelines');
+		 	  }
+		 	  elseif($num_comments > 1){
+		 	  	  $comments = $num_comments.' '. __('Comments');
+		 	  }
+		 	  else{
+		 	  	   $comments ="1 Comment";
+		 	  }
+		 $write_comments = '<a href="' . get_comments_link($post_id) .'">'. $comments.'</a>';
+		 }
+		else{$write_comments =  '';}
+
+		return $write_comments;
+
 	}
 
 	function load_posts( $number = 20, $page = 1, $category = null){
