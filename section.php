@@ -124,8 +124,6 @@ class PostPins extends PageLinesSection {
 		
 		$number_of_pins = (ploption('pins_number', $this->oset)) ? ploption('pins_number', $this->oset) : 15;
 	
-		$this->pl_current_url();
-	
 		$current_url = $this->pl_current_url();
 		
 		$page = (isset($_GET['pins']) && $_GET['pins'] != 1) ? $_GET['pins'] : 1;
