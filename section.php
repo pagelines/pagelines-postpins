@@ -179,7 +179,7 @@ class PostPins extends PageLinesSection {
 			
 			$class = ( ploption('pins_loading', $this->oset) == 'infinite' ) ? 'iscroll' : 'fetchpins';
 				
-			$next_url = sprintf('<div class="%s fetchlink"><a href="%s">%s</a></div>', $class, $u, __('Load More Posts', 'pagelines'));
+			$next_url = sprintf('<div class="%s fetchlink"><a class="button" href="%s">%s</a></div>', $class, $u, __('Load More Posts', 'pagelines'));
 		
 		} else
 			$next_url = '';

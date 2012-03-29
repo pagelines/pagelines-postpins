@@ -68,9 +68,8 @@
 	 ************/
 	.fetchlink {text-align: center; margin: 1em 0; }
 	.fetchlink a{
-		font-size: 1.2em;
 		display: inline-block;
-		padding: 10px 40px;
+		padding: 5px 40px;
 	}
 	
 	#infscr-loading {
