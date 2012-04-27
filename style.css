@@ -18,12 +18,16 @@
 	
 }*/
 
-
 	.postpin, .fetchlink a{
-		margin: 8px;
-		box-shadow: 0 1px 4px rgba(0,0,0,.3);
+		box-shadow: 0 1px 4px rgba(0,0,0,.3);	
+	}
+	.fetchlink a{
+		margin: 8px;	
 	}
 
+	.postpin{
+		margin: 8px 0;
+	}
 	
 	.postpin-pad{
 		padding: 10px;

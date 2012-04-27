@@ -7,7 +7,7 @@
 	Class Name: PostPins	
 	Workswith: templates, main
 	Edition: Pro
-	Version: 1.0
+	Version: 1.0.2
 */
 
 /**
@@ -28,7 +28,8 @@ class PostPins extends PageLinesSection {
 	
 	function section_head(){
 		
-		$width = (ploption('pins_width', $this->oset)) ? ploption('pins_width', $this->oset) : 237;
+		$width = (ploption('pins_width', $this->oset)) ? ploption('pins_width', $this->oset) : 255;
+		$gutter_width = (ploption('pins_gutterwidth', $this->oset)) ? ploption('pins_gutterwidth', $this->oset) : 15;
 		?>
 		<style>.postpin-wrap{width: <?php echo $width;?>px; }</style>
 		<script>
@@ -44,6 +45,7 @@ class PostPins extends PageLinesSection {
 				theContainer.masonry({
 					itemSelector : '.postpin-wrap',
 					columnWidth: <?php echo $width;?>,
+					gutterWidth: <?php echo $gutter_width;?>,
 					isFitWidth: true
 				});
 			
@@ -85,9 +87,17 @@ class PostPins extends PageLinesSection {
 						result = jQuery(out).find('.pinboard .postpin-wrap');
 						nextlink = jQuery(out).find('.fetchpins a').attr('href');
 						
-						jQuery('.postpin-list').append(result).masonry('appended', result);
+						var theContainer = jQuery('.postpin-list');
+						
+						theContainer.append(result);
+						
+						theContainer.imagesLoaded(function(){
+							theContainer.masonry('appended', result);
+						});
 						
 						jQuery('.fetchpins a').removeClass('loading').text('<?php _e('Load More Posts', 'pagelines');?>');
+						
+						
 						
 						if (nextlink != undefined) {
 							jQuery('.fetchpins a').attr('href', nextlink);
@@ -240,6 +250,13 @@ class PostPins extends PageLinesSection {
 							'inputlabel' 	=> __( 'Pin Width in Pixels', 'pagelines' ),
 							'title' 		=> __( 'Pin Width', 'pagelines' ),
 							'shortexp' 		=> __( 'The width of post pins in pixels. Default is <strong>237px</strong>.', 'pagelines' )
+					),
+					'pins_gutterwidth' => array(
+							'version'		=> 'pro',
+							'type' 			=> 'text_small',
+							'inputlabel' 	=> __( 'Pin Gutter Width in Pixels', 'pagelines' ),
+							'title' 		=> __( 'Pin Gutter Width', 'pagelines' ),
+							'shortexp' 		=> __( 'The width of the spacing between post pins in pixels. Default is <strong>15px</strong>.', 'pagelines' )
 					),
 					'pins_number' => array(
 						'version'		=> 'pro',
