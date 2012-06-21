@@ -7,7 +7,8 @@
 	Class Name: PostPins	
 	Workswith: templates, main
 	Edition: Pro
-	Version: 1.0.2
+	Demo: http://demo.pagelines.com/framework/postpins/
+	Version: 1.1
 */
 
 /**
@@ -191,7 +192,7 @@ class PostPins extends PageLinesSection {
 			
 			$display = ($class == 'iscroll') ? 'style="display: none"' : '';	
 				
-			$next_url = sprintf('<div class="%s fetchlink" %s><a class="button" href="%s">%s</a></div>', $class, $display, $u, __('Load More Posts', 'pagelines'));
+			$next_url = sprintf('<div class="%s fetchlink" %s><a class="btn" href="%s">%s</a></div>', $class, $display, $u, __('Load More Posts', 'pagelines'));
 		
 		} else
 			$next_url = '';
