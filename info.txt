@@ -6,6 +6,9 @@ A continuous list of post 'pins', inspired by Pinterest. Loaded dynamically and 
 
 == Changelog ==
 
+= 1.2 =
+* Added jQuery as a dep.
+
 = 1.1 =
 * Optimized for PageLines 2.2
 * Added info.txt
