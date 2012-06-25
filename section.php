@@ -8,7 +8,7 @@
 	Workswith: templates, main
 	Edition: Pro
 	Demo: http://demo.pagelines.com/framework/postpins/
-	Version: 1.1
+	Version: 1.2
 */
 
 /**
@@ -23,8 +23,8 @@ class PostPins extends PageLinesSection {
 	 * Load styles and scripts
 	 */
 	function section_styles(){
-		wp_enqueue_script('masonry', $this->base_url.'/script.masonry.js');
-		wp_enqueue_script('infinitescroll', $this->base_url.'/script.infinitescroll.js');
+		wp_enqueue_script('masonry', $this->base_url.'/script.masonry.js', array( 'jquery' ) );
+		wp_enqueue_script('infinitescroll', $this->base_url.'/script.infinitescroll.js', array( 'jquery' ) );
 	}
 	
 	function section_head(){
