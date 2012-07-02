@@ -6,6 +6,9 @@ A continuous list of post 'pins', inspired by Pinterest. Loaded dynamically and 
 
 == Changelog ==
 
+= 1.2.1 =
+* Detect lazy-loader.
+
 = 1.2 =
 * Added jQuery as a dep.
 

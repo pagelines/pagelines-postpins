@@ -8,7 +8,7 @@
 	Workswith: templates, main
 	Edition: Pro
 	Demo: http://demo.pagelines.com/framework/postpins/
-	Version: 1.2
+	Version: 1.2.1
 */
 
 /**
@@ -144,7 +144,14 @@ class PostPins extends PageLinesSection {
 		foreach( $this->load_posts($number_of_pins, $page, $category) as $key => $p ){
 			
 			if(has_post_thumbnail($p->ID) && get_the_post_thumbnail($p->ID) != ''){
-				$thumb = get_the_post_thumbnail($p->ID); 
+				$thumb = get_the_post_thumbnail($p->ID);
+				
+				$check = strpos( $thumb, 'data-lazy-src' );			
+				if( $check ) {					
+					// detected lazy-loader.			
+					$thumb = preg_replace( '#\ssrc="[^"]*"#', '', $thumb );
+					$thumb = str_replace( 'data-lazy-', '', $thumb );	
+				}
 				$image = sprintf('<div class="pin-img-wrap"><a class="pin-img" href="%s">%s</a></div>', get_permalink( $p->ID ), $thumb);
 			} else 
 				$image = '';
