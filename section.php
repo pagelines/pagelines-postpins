@@ -8,7 +8,7 @@
 	Workswith: templates, main
 	Edition: Pro
 	Demo: http://demo.pagelines.com/framework/postpins/
-	Version: 1.2.1
+	Version: 1.3
 */
 
 /**
@@ -128,6 +128,8 @@ class PostPins extends PageLinesSection {
 	* Section template.
 	*/
    function section_template() { 
+
+
 		global $wp_query;
 		global $post; 
 		
@@ -136,6 +138,8 @@ class PostPins extends PageLinesSection {
 		$number_of_pins = (ploption('pins_number', $this->oset)) ? ploption('pins_number', $this->oset) : 15;
 	
 		$current_url = $this->pl_current_url();
+
+		$image_size = ( ploption( 'pins_thumbsize', $this->oset ) ) ? ploption( 'pins_thumbsize', $this->oset ) : 'medium';
 		
 		$page = (isset($_GET['pins']) && $_GET['pins'] != 1) ? $_GET['pins'] : 1;
 		
@@ -144,7 +148,7 @@ class PostPins extends PageLinesSection {
 		foreach( $this->load_posts($number_of_pins, $page, $category) as $key => $p ){
 			
 			if(has_post_thumbnail($p->ID) && get_the_post_thumbnail($p->ID) != ''){
-				$thumb = get_the_post_thumbnail($p->ID);
+				$thumb = get_the_post_thumbnail($p->ID, $image_size );
 				
 				$check = strpos( $thumb, 'data-lazy-src' );			
 				if( $check ) {					
@@ -259,6 +263,14 @@ class PostPins extends PageLinesSection {
 							'title' 		=> __( 'Pin Width', 'pagelines' ),
 							'shortexp' 		=> __( 'The width of post pins in pixels. Default is <strong>237px</strong>.', 'pagelines' )
 					),
+					'pins_thumbsize'	=> array(
+						'type'	=> 'select',
+						'default'	=>	'large',
+						'selectvalues'	=> $this->get_image_sizes(),
+						'inputlabel' 	=> __( 'Select attachment image source', 'pagelines' ),
+						'title' 		=> __( 'Attachment source', 'pagelines' ),
+						'shortexp' 		=> __( 'Select image type: thumbnail, medium, large etc.', 'pagelines' )
+						),
 					'pins_gutterwidth' => array(
 							'version'		=> 'pro',
 							'type' 			=> 'text_small',
@@ -308,5 +320,19 @@ class PostPins extends PageLinesSection {
 			register_metatab( $metatab_settings, $page_metatab_array );
 
 	}
+	function get_image_sizes() {
+		global $_wp_additional_image_sizes;
 
+		$sizes = array(
+				'thumbnail' => array( 'name' => 'Thumbnail' ),
+				'medium'=> array( 'name' => 'Medium' ),
+				'large'	=> array( 'name' => 'Large' ),
+				'full'	=> array( 'name' => 'Full' )
+				);
+		if ( is_array( $_wp_additional_image_sizes ) && ! empty( $_wp_additional_image_sizes ) )
+			foreach ( $_wp_additional_image_sizes as $size => $data )
+				$sizes[] = array( 'name' => $size );
+
+		return $sizes;
+	}
 }
