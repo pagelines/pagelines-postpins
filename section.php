@@ -8,15 +8,11 @@
 	Workswith: templates, main
 	Edition: Pro
 	Demo: http://demo.pagelines.com/framework/postpins/
-	Version: 1.3
+	Version: 1.4.0
+	Filter: format
 */
 
-/**
- * Main section class
- *
- * @package PageLines Framework
- * @author PageLines
- */
+
 class PostPins extends PageLinesSection {
 
 	/**

@@ -1,5 +1,16 @@
 @light-base = lighten( @pl-base, @invert-light + 5  );
 
+.pin-meta a, 
+.pin-meta, 
+.fetchlink a, 
+.fetchlink a:hover{
+	color: @textColorSubtle;
+}
+.pin-meta .divider{
+	color: @textColorLight;
+}
+
+
 .postpin-list{
 	margin: 0 auto;
 }
@@ -7,42 +18,42 @@
 .postpin-wrap{
 	width: 237px;
 	float:left;
+
 }
 
-.postpin {
-
-   	-ms-word-break: break-all;
+.postpin{
+	-ms-word-break: break-all;
 	word-break: break-all;
 	word-break: break-word;
 	-webkit-hyphens: auto;
 	-moz-hyphens: auto;
 	hyphens: auto;
-	background: @light-base; 
-	border: 1px solid lighten(@light-base, 4);
+	background: @baseContrastSlight; 
+	border: 1px solid @baseLighterMore;
 	margin: 8px 0;
 	.box-shadow(0 1px 4px rgba(0,0,0,.3));
- 		
- 	.postpin-pad { 
+	.postpin-pad{
 		padding: 10px;
-	}
 
-    // Post Typography
-	.postpin .headline {
+	}
+	.headline{
 		font-size: 1.3em;
 		line-height: 1.3em;
 		margin: 0 0 .4em 0;
 	}
-	.postpin .summary {		
+	.summary{
+
 		font-size: .95em;
 		line-height: 1.5em;
 	}
+	
+}
 
-    .pin-meta a, .pin-meta, .fetchlink a, .fetchlink a:hover{
-		color: fadeout(@pl-text, 60%);
+	.postpin, 
+	.fetchlink a{
+		box-shadow: 0 1px 4px rgba(0,0,0,.3);	
 	}
-	.pin-meta .divider{
-		color: fadeout(@pl-text, 85%);
-	}
+	
 	.pin-meta {
 		font-size: .85em;
 	}
@@ -56,27 +67,35 @@
     // Post Image
 	.pin-img-wrap{
 		padding: 10px;
-	}
 
-	.pin-img, .pin-img img{
-		display: block;
+		.pin-img, 
+		.pin-img img{
+			max-width: 100%;
+			display: block;
+		}
 	}
+		
 
-}
-	
-	// Load Links
+	/*
+	 * @ Loading & Links 
+	 ************/
 	.fetchlink {
 		text-align: center; 
 		margin: 1em 0; 
+		a{
+			display: inline-block;
+			padding: 5px 40px;
+
+			margin: 8px;
+			.box-shadow(0 1px 4px rgba(0,0,0,.3));	
+			.pin-img, 
+			.pin-img img{
+				max-width: 100%;
+				display: block;
+			}
+		}
 	}
 
-	.fetchlink a{
-		display: inline-block;
-		padding: 5px 40px;
-		margin: 8px;
-		.box-shadow(0 1px 4px rgba(0,0,0,.3));	
-	}
-	
 	#infscr-loading {
 		text-align: center;
 		z-index: 100;
@@ -114,13 +133,4 @@
 	          transition-property: left, right, top;
 	}
 
-/*@media screen and (max-width:900px){
-	.postpin-wrap{width: 33.33333333%}
-}
-@media screen and (max-width:700px){
-	.postpin-wrap{width: 50%}
-}
-@media screen and (max-width:450px){
-	.postpin-wrap{width: 100%}
-	
-}*/
+
