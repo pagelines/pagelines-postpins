@@ -9,7 +9,10 @@ To use simply drag in the PostPins section to the templates you'd like to use it
 
 == Changelog ==
 
-== 1.4 ==
+= 1.4.1 =
+* Fix PHP notice.
+
+= 1.4.0 =
 * Add info.txt
 * Lessify extension
 * Bugfixes
