@@ -229,7 +229,7 @@ class PostPins extends PageLinesSection {
 	function load_posts( $number = 20, $page = 1, $category = null){
 		$query = array();
 
-		if(isset($category))
+		if( isset($category) && !empty($category) )
 			$query['category_name'] = $category;
 
 		$query['paged'] = $page;
