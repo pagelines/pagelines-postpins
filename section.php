@@ -168,7 +168,8 @@ class PostPins extends PageLinesSection {
 					'<div class="pin-meta pin-top subtext">%s</div>', 
 					get_the_category_list( ', ', '', $p->ID)
 				);
-			}
+			} else 
+				$meta_top = '';
 			
 			$content = sprintf(
 				'%s<h4 class="headline pin-title"><a href="%s">%s</a></h4><div class="pin-excerpt summary">%s %s</div>%s', 
@@ -301,7 +302,7 @@ class PostPins extends PageLinesSection {
 						'inputlabel' 	=> __( 'Pin Post Category', 'pagelines' ),
 						'title' 		=> __( 'Pins Category/Posts Mode', 'pagelines' ),
 						'shortexp' 		=> __( 'Select a post category to use with post pins, leave default for all posts.', 'pagelines' ),
-						'exp' 			=> __( "You can select to use only posts from a specific category, leave blank to use all posts. Default is to show all posts.", 'pagelines' ),
+						'exp' 			=> __( "You can select to use only posts from a specific category, leave blank to use all posts. Default is to show all posts.", 'pagelines' )
 					)
 				);
 
@@ -312,7 +313,7 @@ class PostPins extends PageLinesSection {
 					'clone_id'	=> $settings['clone_id'], 
 					'active'	=> $settings['active']
 				);
-
+				
 			register_metatab( $metatab_settings, $page_metatab_array );
 
 	}
