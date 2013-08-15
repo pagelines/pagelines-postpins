@@ -8,25 +8,27 @@
 	Workswith: templates, main
 	Edition: Pro
 	Demo: http://demo.pagelines.com/framework/postpins/
-	Version: 1.4.1
+	Version: 1.5
+	v3: true
 	Filter: format
 */
 
 
 class PostPins extends PageLinesSection {
-
+	
+	const version = '1.5';
 	/**
 	 * Load styles and scripts
 	 */
 	function section_styles(){
-		wp_enqueue_script('masonry', $this->base_url.'/script.masonry.js', array( 'jquery' ) );
-		wp_enqueue_script('infinitescroll', $this->base_url.'/script.infinitescroll.js', array( 'jquery' ) );
+		wp_enqueue_script('masonry', $this->base_url.'/script.masonry.js', array( 'jquery' ), self::version, true);
+		wp_enqueue_script('infinitescroll', $this->base_url.'/script.infinitescroll.js', array( 'jquery' ), self::version, true);
 	}
 
 	function section_head(){
 
-		$width = (ploption('pins_width', $this->oset)) ? ploption('pins_width', $this->oset) : 255;
-		$gutter_width = (ploption('pins_gutterwidth', $this->oset)) ? ploption('pins_gutterwidth', $this->oset) : 15;
+		$width = ($this->opt('pins_width', $this->oset)) ? $this->opt('pins_width', $this->oset) : 255;
+		$gutter_width = ($this->opt('pins_gutterwidth', $this->oset)) ? $this->opt('pins_gutterwidth', $this->oset) : 15;
 		?>
 		<style>.postpin-wrap{width: <?php echo $width;?>px; }</style>
 		<script>
@@ -48,7 +50,7 @@ class PostPins extends PageLinesSection {
 
 			});
 
-			<?php if(ploption('pins_loading', $this->oset) == 'infinite'): ?>
+			<?php if($this->opt('pins_loading', $this->oset) == 'infinite'): ?>
 
 				theContainer.infinitescroll({
 					navSelector : '.iscroll',
@@ -71,7 +73,7 @@ class PostPins extends PageLinesSection {
 
 		});
 
-			<?php if(ploption('pins_loading', $this->oset) != 'infinite'): ?>
+			<?php if($this->opt('pins_loading', $this->oset) != 'infinite'): ?>
 			jQuery('.fetchpins a').live('click', function(e) {
 				e.preventDefault();
 				jQuery(this).addClass('loading').text('<?php _e('Loading...', 'pagelines');?>');
@@ -129,13 +131,13 @@ class PostPins extends PageLinesSection {
 		global $wp_query;
 		global $post;
 
-		$category = (ploption('pins_category', $this->oset)) ? ploption('pins_category', $this->oset) : null;
+		$category = ($this->opt('pins_category', $this->oset)) ? $this->opt('pins_category', $this->oset) : null;
 
-		$number_of_pins = (ploption('pins_number', $this->oset)) ? ploption('pins_number', $this->oset) : 15;
+		$number_of_pins = ($this->opt('pins_number', $this->oset)) ? $this->opt('pins_number', $this->oset) : 15;
 
 		$current_url = $this->pl_current_url();
 
-		$image_size = ( ploption( 'pins_thumbsize', $this->oset ) ) ? ploption( 'pins_thumbsize', $this->oset ) : 'medium';
+		$image_size = ( $this->opt( 'pins_thumbsize', $this->oset ) ) ? $this->opt( 'pins_thumbsize', $this->oset ) : 'medium';
 
 		$page = (isset($_GET['pins']) && $_GET['pins'] != 1) ? $_GET['pins'] : 1;
 
@@ -193,7 +195,7 @@ class PostPins extends PageLinesSection {
 
 		if( !empty($next_posts) ){
 
-			$class = ( ploption('pins_loading', $this->oset) == 'infinite' ) ? 'iscroll' : 'fetchpins';
+			$class = ( $this->opt('pins_loading', $this->oset) == 'infinite' ) ? 'iscroll' : 'fetchpins';
 
 			$display = ($class == 'iscroll') ? 'style="display: none"' : '';
 
